@@ -80,6 +80,7 @@ const BaseNode = ({
       
       {/* Node title */}
       {title && <div style={titleStyle}>{title}</div>}
+      }
       
       {/* Node content */}
       <div className="node-content">
