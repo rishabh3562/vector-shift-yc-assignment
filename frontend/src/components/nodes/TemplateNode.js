@@ -1,22 +1,22 @@
-import {BaseNode} from "./BaseNode";
-import {useState, useEffect} from "react";
+import { BaseNode } from "./BaseNode";
+import { useState, useEffect } from "react";
+import { extractVariables } from "../../utils/nodeHelpers";
 
-export const TemplateNode = ({id, data}) => {
+export const TemplateNode = ({ id, data }) => {
   const [template, setTemplate] = useState(data?.template || "");
   const [variables, setVariables] = useState([]);
 
   useEffect(() => {
-    const matches = template.match(/\{\{([^}]+)\}\}/g) || [];
-    const vars = matches.map((match) => match.slice(2, -2).trim());
-    setVariables([...new Set(vars)]);
+    const vars = extractVariables(template);
+    setVariables(vars);
   }, [template]);
 
   return (
     <BaseNode
       id={id}
       title="Template"
-      inputs={variables.map((v) => ({id: v}))}
-      outputs={[{id: "output"}]}
+      inputs={variables.map((v) => ({ id: v }))}
+      outputs={[{ id: "output" }]}
       type="template"
       data={data}
     >

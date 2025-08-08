@@ -1,9 +1,8 @@
-// inputNode.js
+import { BaseNode } from "./BaseNode";
+import { useState } from "react";
+import { IO_TYPE_OPTIONS } from "../../constants/nodeTypes";
 
-import {BaseNode} from "./BaseNode";
-import {useState} from "react";
-
-export const InputNode = ({id, data}) => {
+export const InputNode = ({ id, data }) => {
   const [currName, setCurrName] = useState(
     data?.inputName || id.replace("customInput-", "input_")
   );
@@ -13,7 +12,7 @@ export const InputNode = ({id, data}) => {
     <BaseNode
       id={id}
       title="Input"
-      outputs={[{id: "value"}]}
+      outputs={[{ id: "value" }]}
       type="input"
       data={data}
     >
@@ -30,8 +29,11 @@ export const InputNode = ({id, data}) => {
           value={inputType}
           onChange={(e) => setInputType(e.target.value)}
         >
-          <option value="Text">Text</option>
-          <option value="File">File</option>
+          {IO_TYPE_OPTIONS.map(option => (
+            <option key={option.value} value={option.value}>
+              {option.label}
+            </option>
+          ))}
         </select>
       </div>
     </BaseNode>

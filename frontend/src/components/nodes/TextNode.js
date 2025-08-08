@@ -1,25 +1,23 @@
-// textNode.js
+import { BaseNode } from "./BaseNode";
+import { useState, useEffect, useRef } from "react";
+import { extractVariables } from "../../utils/nodeHelpers";
 
-import {BaseNode} from "./BaseNode";
-import {useState, useEffect, useRef} from "react";
-
-export const TextNode = ({id, data}) => {
+export const TextNode = ({ id, data }) => {
   const [currText, setCurrText] = useState(data?.text || "{{input}}");
   const [variables, setVariables] = useState([]);
   const textareaRef = useRef(null);
 
   useEffect(() => {
-    const matches = currText.match(/\{\{([^}]+)\}\}/g) || [];
-    const vars = matches.map((match) => match.slice(2, -2).trim());
-    setVariables([...new Set(vars)]);
+    const vars = extractVariables(currText);
+    setVariables(vars);
   }, [currText]);
 
   return (
     <BaseNode
       id={id}
       title="Text"
-      inputs={variables.map((v) => ({id: v}))}
-      outputs={[{id: "output"}]}
+      inputs={variables.map((v) => ({ id: v }))}
+      outputs={[{ id: "output" }]}
       type="text"
       data={data}
     >

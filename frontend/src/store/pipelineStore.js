@@ -1,6 +1,4 @@
-// store.js
-
-import {create} from "zustand";
+import { create } from "zustand";
 import {
   addEdge,
   applyNodeChanges,
@@ -13,9 +11,9 @@ const createNodeSlice = (set, get) => ({
   nodes: [],
   nodeIDs: {},
   getNodeID: (type) => {
-    const newIDs = {...get().nodeIDs};
+    const newIDs = { ...get().nodeIDs };
     newIDs[type] = (newIDs[type] || 0) + 1;
-    set({nodeIDs: newIDs});
+    set({ nodeIDs: newIDs });
     return `${type}-${newIDs[type]}`;
   },
   addNode: (node) =>
@@ -37,7 +35,7 @@ const createNodeSlice = (set, get) => ({
     set((state) => ({
       nodes: state.nodes.map((node) =>
         node.id === nodeId
-          ? {...node, data: {...node.data, [fieldName]: fieldValue}}
+          ? { ...node, data: { ...node.data, [fieldName]: fieldValue } }
           : node
       ),
     })),

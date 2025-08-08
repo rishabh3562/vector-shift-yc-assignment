@@ -1,11 +1,10 @@
-// submit.js
-
-import {useStore} from "../state/store";
-import {useState} from "react";
-import {toast} from "react-toastify";
+import { useState } from "react";
+import { toast } from "react-toastify";
+import { useStore } from "../../store/pipelineStore";
+import { submitPipeline } from "../../services/api";
 
 export const SubmitButton = () => {
-  const {nodes, edges} = useStore();
+  const { nodes, edges } = useStore();
   const [isLoading, setIsLoading] = useState(false);
 
   const handleSubmit = async () => {
@@ -16,19 +15,7 @@ export const SubmitButton = () => {
 
     setIsLoading(true);
     try {
-      const response = await fetch("http://localhost:8000/pipelines/parse", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/x-www-form-urlencoded",
-        },
-        body: `pipeline=${encodeURIComponent(JSON.stringify({nodes, edges}))}`,
-      });
-
-      const data = await response.json();
-
-      if (data.error) {
-        throw new Error(data.error);
-      }
+      const data = await submitPipeline({ nodes, edges });
 
       toast.success(
         <div>

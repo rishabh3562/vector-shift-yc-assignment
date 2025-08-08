@@ -1,9 +1,8 @@
-// outputNode.js
+import { BaseNode } from "./BaseNode";
+import { useState } from "react";
+import { OUTPUT_TYPE_OPTIONS } from "../../constants/nodeTypes";
 
-import {BaseNode} from "./BaseNode";
-import {useState} from "react";
-
-export const OutputNode = ({id, data}) => {
+export const OutputNode = ({ id, data }) => {
   const [currName, setCurrName] = useState(
     data?.outputName || id.replace("customOutput-", "output_")
   );
@@ -13,7 +12,7 @@ export const OutputNode = ({id, data}) => {
     <BaseNode
       id={id}
       title="Output"
-      inputs={[{id: "value"}]}
+      inputs={[{ id: "value" }]}
       type="output"
       data={data}
     >
@@ -30,8 +29,11 @@ export const OutputNode = ({id, data}) => {
           value={outputType}
           onChange={(e) => setOutputType(e.target.value)}
         >
-          <option value="Text">Text</option>
-          <option value="File">Image</option>
+          {OUTPUT_TYPE_OPTIONS.map(option => (
+            <option key={option.value} value={option.value}>
+              {option.label}
+            </option>
+          ))}
         </select>
       </div>
     </BaseNode>

@@ -1,15 +1,16 @@
-import {BaseNode} from "./BaseNode";
-import {useState} from "react";
+import { BaseNode } from "./BaseNode";
+import { useState } from "react";
+import { MERGE_OPTIONS } from "../../constants/nodeTypes";
 
-export const MergeNode = ({id, data}) => {
+export const MergeNode = ({ id, data }) => {
   const [mergeType, setMergeType] = useState(data?.mergeType || "concat");
 
   return (
     <BaseNode
       id={id}
       title="Merge"
-      inputs={[{id: "input1"}, {id: "input2"}]}
-      outputs={[{id: "output"}]}
+      inputs={[{ id: "input1" }, { id: "input2" }]}
+      outputs={[{ id: "output" }]}
       type="merge"
       data={data}
     >
@@ -18,9 +19,11 @@ export const MergeNode = ({id, data}) => {
         value={mergeType}
         onChange={(e) => setMergeType(e.target.value)}
       >
-        <option value="concat">Concatenate</option>
-        <option value="join">Join</option>
-        <option value="zip">Zip</option>
+        {MERGE_OPTIONS.map(option => (
+          <option key={option.value} value={option.value}>
+            {option.label}
+          </option>
+        ))}
       </select>
     </BaseNode>
   );

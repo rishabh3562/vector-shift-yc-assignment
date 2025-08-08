@@ -1,62 +1,31 @@
-import { useState, useEffect } from "react";
-import { PipelineToolbar } from "./utils/toolbar";
-import { PipelineUI } from "./utils/uiToolkit";
-import { SubmitButton } from "./utils/apiSubmit";
-import { Tutorial } from "./components/shared/Tutorial";
-import { ThemeToggle } from "./components/shared/ThemeToggles";
+import { PipelineToolbar } from "./components/ui/PipelineToolbar";
+import { PipelineCanvas } from "./components/workspace/PipelineCanvas";
+import { SubmitButton } from "./components/ui/SubmitButton";
+import { Tutorial } from "./components/ui/Tutorial";
+import { ThemeToggle } from "./components/ui/ThemeToggle";
+import { useTheme } from "./hooks/useTheme";
+import { useTutorial } from "./hooks/useTutorial";
 import { ToastContainer } from "react-toastify";
+import { TOAST_CONFIG } from "./constants/ui";
 import "react-toastify/dist/ReactToastify.css";
 import "./styles/tutorial.css";
 
 function App() {
-  const [theme, setTheme] = useState("dark");
-  const [isFirstVisit, setIsFirstVisit] = useState(true);
-
-  useEffect(() => {
-    const hasVisited = localStorage.getItem("hasVisitedBefore");
-    if (hasVisited) {
-      setIsFirstVisit(false);
-    }
-  }, []);
-
-  useEffect(() => {
-    document.documentElement.setAttribute("data-theme", theme);
-    document.body.className = theme;
-  }, [theme]);
-
-  const handleTutorialComplete = () => {
-    localStorage.setItem("hasVisitedBefore", "true");
-    setIsFirstVisit(false);
-  };
-
-  const toggleTheme = () => {
-    setTheme(theme === "dark" ? "light" : "dark");
-    document.body.setAttribute(
-      "data-theme",
-      theme === "dark" ? "light" : "dark"
-    );
-  };
+  const { theme, toggleTheme } = useTheme();
+  const { isFirstVisit, onComplete } = useTutorial();
 
   return (
     <div className={`app-container ${theme}`}>
       <ThemeToggle theme={theme} onToggle={toggleTheme} />
       <PipelineToolbar />
-      <PipelineUI />
+      <PipelineCanvas />
       <SubmitButton />
       <Tutorial
         isFirstVisit={isFirstVisit}
-        onComplete={handleTutorialComplete}
+        onComplete={onComplete}
       />
       <ToastContainer
-        position="top-right"
-        autoClose={3000}
-        hideProgressBar={false}
-        newestOnTop
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
+        {...TOAST_CONFIG}
         theme={theme}
       />
     </div>
