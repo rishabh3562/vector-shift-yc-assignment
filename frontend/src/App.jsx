@@ -1,10 +1,10 @@
-import {useState, useEffect} from "react";
-import {PipelineToolbar} from "./utils/toolbar";
-import {PipelineUI} from "./utils/uiToolkit";
-import {SubmitButton} from "./utils/apiSubmit";
-import {Tutorial} from "./components/shared/Tutorial";
-import {ThemeToggle} from "./components/shared/ThemeToggles";
-import {ToastContainer} from "react-toastify";
+import { useState, useEffect } from "react";
+import { PipelineToolbar } from "./utils/toolbar";
+import { PipelineUI } from "./utils/uiToolkit";
+import { SubmitButton } from "./utils/apiSubmit";
+import { Tutorial } from "./components/shared/Tutorial";
+import { ThemeToggle } from "./components/shared/ThemeToggles";
+import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "./styles/tutorial.css";
 
