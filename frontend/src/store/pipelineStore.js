@@ -66,15 +66,27 @@ const createEdgeSlice = (set) => ({
     })),
 });
 
+// UI slice for toolbar and other UI state
+const createUISlice = (set) => ({
+  toolbarStyle: 'sidebar', // 'sidebar' | 'floating'
+  setToolbarStyle: (style) => set({ toolbarStyle: style }),
+  toggleToolbarStyle: () =>
+    set((state) => ({
+      toolbarStyle: state.toolbarStyle === 'sidebar' ? 'floating' : 'sidebar',
+    })),
+});
+
 // Create the store
 const useStore = create((set, get) => ({
   ...createNodeSlice(set, get),
   ...createEdgeSlice(set),
+  ...createUISlice(set),
 }));
 
 // Selectors
 const useNodes = () => useStore((state) => state.nodes);
 const useEdges = () => useStore((state) => state.edges);
+const useToolbarStyle = () => useStore((state) => state.toolbarStyle);
 const useStoreActions = () => useStore((state) => ({
   addNode: state.addNode,
   removeNode: state.removeNode,
@@ -84,6 +96,17 @@ const useStoreActions = () => useStore((state) => ({
   updateNodeField: state.updateNodeField,
   getNodeID: state.getNodeID,
 }));
+const useUIActions = () => useStore((state) => ({
+  setToolbarStyle: state.setToolbarStyle,
+  toggleToolbarStyle: state.toggleToolbarStyle,
+}));
 
 // Export everything at the end
-export { useStore, useNodes, useEdges, useStoreActions };
+export {
+  useStore,
+  useNodes,
+  useEdges,
+  useToolbarStyle,
+  useStoreActions,
+  useUIActions
+};

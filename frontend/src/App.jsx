@@ -20,14 +20,8 @@ function App() {
       <PipelineToolbar />
       <PipelineCanvas />
       <SubmitButton />
-      <Tutorial
-        isFirstVisit={isFirstVisit}
-        onComplete={onComplete}
-      />
-      <ToastContainer
-        {...TOAST_CONFIG}
-        theme={theme}
-      />
+      <Tutorial isFirstVisit={isFirstVisit} onComplete={onComplete} />
+      <ToastContainer {...TOAST_CONFIG} theme={theme} />
     </div>
   );
 }

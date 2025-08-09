@@ -16,7 +16,7 @@ const NODE_DESCRIPTIONS = {
     [NODE_TYPES.TRANSFORM]: 'Transform data format and structure',
 };
 
-// Icons for each node type
+// Icons for each node type (you can replace with actual SVGs or icon library)
 const NODE_ICONS = {
     [NODE_TYPES.INPUT]: '📥',
     [NODE_TYPES.OUTPUT]: '📤',
@@ -39,26 +39,28 @@ export const N8NToolbar = () => {
     const nodeTypeEntries = Object.entries(NODE_TYPES);
 
     return (
-        <>
+        <> 
+            {/* <div className="floating-toolbar-container"> */}
+            <div className="">
             {/* Plus Button */}
-            <motion.button
-                className="n8n-add-button"
-                onClick={toggleSidebar}
-                whileHover={{ scale: 1.1 }}
-                whileTap={{ scale: 0.95 }}
-                animate={{ rotate: isOpen ? 45 : 0 }}
-                transition={{ duration: 0.3 }}
-            >
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
-                    <path
-                        d="M12 5V19M5 12H19"
-                        stroke="currentColor"
-                        strokeWidth="2"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                    />
-                </svg>
-            </motion.button>
+                <motion.button
+                    className="n8n-add-button"
+                    onClick={toggleSidebar}
+                    whileHover={{ scale: 1.1 }}
+                    whileTap={{ scale: 0.95 }}
+                    animate={{ rotate: isOpen ? 45 : 0 }}
+                    transition={{ duration: 0.3 }}
+                >
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                        <path
+                            d="M12 5V19M5 12H19"
+                            stroke="currentColor"
+                            strokeWidth="2"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                        />
+                    </svg>
+                </motion.button>
 
             {/* Sidebar */}
             <AnimatePresence>
@@ -66,7 +68,8 @@ export const N8NToolbar = () => {
                     <>
                         {/* Backdrop */}
                         <motion.div
-                            className="n8n-backdrop"
+                            // className="n8n-backdrop" // this was giving problems just because the overlay was being there
+                            
                             initial={{ opacity: 0 }}
                             animate={{ opacity: 1 }}
                             exit={{ opacity: 0 }}
@@ -103,24 +106,17 @@ export const N8NToolbar = () => {
                                         initial={{ opacity: 0, y: 20 }}
                                         animate={{ opacity: 1, y: 0 }}
                                         transition={{ delay: index * 0.05 }}
-                                        // Remove onClick to prevent interference with drag
-                                        style={{
-                                            pointerEvents: 'none',  // Disable pointer events on container
-                                            position: 'relative'
-                                        }}
                                     >
                                         <div className="n8n-node-icon">
                                             {NODE_ICONS[type]}
                                         </div>
                                         <div className="n8n-node-info">
-                                            <div style={{ pointerEvents: 'auto' }}>  {/* Re-enable for draggable node */}
-                                                <DraggableNode
-                                                    type={type}
-                                                    label={NODE_LABELS[type]}
-                                                    isFloating={false}
-                                                    isSidebar={true}
-                                                />
-                                            </div>
+                                            <DraggableNode
+                                                type={type}
+                                                label={NODE_LABELS[type]}
+                                                isFloating={false}
+                                                isSidebar={true}
+                                            />
                                             <p className="n8n-node-description">
                                                 {NODE_DESCRIPTIONS[type]}
                                             </p>
@@ -132,6 +128,7 @@ export const N8NToolbar = () => {
                     </>
                 )}
             </AnimatePresence>
+            </div>
         </>
     );
 };
