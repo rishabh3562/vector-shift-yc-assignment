@@ -16,7 +16,7 @@ const NODE_DESCRIPTIONS = {
     [NODE_TYPES.TRANSFORM]: 'Transform data format and structure',
 };
 
-// Icons for each node type (you can replace with actual SVGs or icon library)
+// Icons for each node type
 const NODE_ICONS = {
     [NODE_TYPES.INPUT]: '📥',
     [NODE_TYPES.OUTPUT]: '📤',
@@ -37,7 +37,7 @@ export const N8NToolbar = () => {
     };
 
     const nodeTypeEntries = Object.entries(NODE_TYPES);
-
+    console.log("nodetypes in n8ntoolbar: ", nodeTypeEntries)
     return (
         <>
             {/* Plus Button */}
@@ -103,6 +103,7 @@ export const N8NToolbar = () => {
                                         initial={{ opacity: 0, y: 20 }}
                                         animate={{ opacity: 1, y: 0 }}
                                         transition={{ delay: index * 0.05 }}
+                                        style={{ pointerEvents: 'auto' }} // Ensure pointer events work
                                     >
                                         <div className="n8n-node-icon">
                                             {NODE_ICONS[type]}

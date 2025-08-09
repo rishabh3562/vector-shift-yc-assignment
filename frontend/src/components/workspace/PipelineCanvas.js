@@ -12,7 +12,7 @@ const proOptions = { hideAttribution: true };
 export const PipelineCanvas = () => {
   const reactFlowWrapper = useRef(null);
   const [reactFlowInstance, setReactFlowInstance] = useState(null);
-  
+
   // Get store values and actions
   const nodes = useStore((state) => state.nodes);
   const edges = useStore((state) => state.edges);
@@ -22,14 +22,15 @@ export const PipelineCanvas = () => {
   const addNode = useStore((state) => state.addNode);
   const getNodeID = useStore((state) => state.getNodeID);
   const handleRemoveNode = useStore((state) => state.removeNode);
-
+  //correct
   const onDrop = useCallback(
+
     (event) => {
       event.preventDefault();
-
+      console.log("[PipelineCanvas,useCallback] event:", event)
       const reactFlowBounds = reactFlowWrapper.current.getBoundingClientRect();
       const type = processDropData(event);
-      
+
       if (!type) return;
 
       const position = reactFlowInstance.project({
@@ -39,22 +40,27 @@ export const PipelineCanvas = () => {
 
       const nodeID = getNodeID(type);
       const newNode = createNode(nodeID, type, position, handleRemoveNode);
-
+      console.log("[PipelineCanvas] type:", type)
+      console.log("[PipelineCanvas] nodeID:", nodeID)
+      console.log("[PipelineCanvas] newNode:", newNode)
       addNode(newNode);
     },
     [reactFlowInstance, addNode, getNodeID, handleRemoveNode]
   );
 
   return (
-    <div ref={reactFlowWrapper} style={{ width: "100wv", height: "70vh" }}>
+    <div
+      ref={reactFlowWrapper}
+      style={{ width: "100vw", height: "70vh" }}
+      onDragOver={handleDragOver} // <-- here instead
+      onDrop={onDrop}
+    >
       <ReactFlow
         nodes={nodes}
         edges={edges}
         onNodesChange={onNodesChange}
         onEdgesChange={onEdgesChange}
         onConnect={onConnect}
-        onDrop={onDrop}
-        onDragOver={handleDragOver}
         onInit={setReactFlowInstance}
         nodeTypes={nodeTypes}
         proOptions={proOptions}
@@ -67,5 +73,6 @@ export const PipelineCanvas = () => {
         <MiniMap />
       </ReactFlow>
     </div>
+
   );
 };

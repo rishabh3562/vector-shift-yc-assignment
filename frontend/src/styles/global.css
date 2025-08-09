@@ -29,7 +29,11 @@
   width: 48px;
   height: 48px;
   border-radius: 50%;
-  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+  background: linear-gradient(
+    135deg,
+    var(--primary-color),
+    var(--secondary-color)
+  );
   border: none;
   color: white;
   cursor: pointer;
@@ -43,7 +47,11 @@
 }
 
 .n8n-add-button:hover {
-  background: linear-gradient(135deg, var(--secondary-color), var(--tertiary-color));
+  background: linear-gradient(
+    135deg,
+    var(--secondary-color),
+    var(--tertiary-color)
+  );
   box-shadow: 0 6px 16px rgba(176, 137, 246, 0.4);
   transform: scale(1.05);
 }
@@ -79,7 +87,11 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background: linear-gradient(135deg, rgba(176, 137, 246, 0.1), rgba(88, 9, 216, 0.05));
+  background: linear-gradient(
+    135deg,
+    rgba(176, 137, 246, 0.1),
+    rgba(88, 9, 216, 0.05)
+  );
 }
 
 .n8n-sidebar-header h3 {
@@ -215,7 +227,7 @@
     width: 100vw;
     max-width: 340px;
   }
-  
+
   .n8n-backdrop {
     background: rgba(15, 10, 31, 0.7);
   }
@@ -429,7 +441,11 @@ body {
 }
 
 .Toastify__progress-bar {
-  background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+  background: linear-gradient(
+    to right,
+    var(--primary-color),
+    var(--secondary-color)
+  );
 }
 
 code {
@@ -470,7 +486,11 @@ code {
   width: 60px;
   height: 60px;
   border-radius: 50%;
-  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+  background: linear-gradient(
+    135deg,
+    var(--primary-color),
+    var(--secondary-color)
+  );
   border: none;
   color: white;
   cursor: pointer;
@@ -485,7 +505,11 @@ code {
 }
 
 .floating-toolbar-toggle:hover {
-  background: linear-gradient(135deg, var(--secondary-color), var(--tertiary-color));
+  background: linear-gradient(
+    135deg,
+    var(--secondary-color),
+    var(--tertiary-color)
+  );
   box-shadow: 0 12px 32px rgba(176, 137, 246, 0.5);
 }
 

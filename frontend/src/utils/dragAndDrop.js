@@ -23,6 +23,7 @@ export const handleDragEnd = (event) => {
  * @param {DragEvent} event - The drag event
  */
 export const handleDragOver = (event) => {
+  console.log("[dragAndDrop.js] handledragover called from pipeline canvas ")
   event.preventDefault();
   event.dataTransfer.dropEffect = 'move';
 };
@@ -34,7 +35,7 @@ export const handleDragOver = (event) => {
  */
 export const processDropData = (event) => {
   const appData = event.dataTransfer.getData('application/reactflow');
-  
+  console.log("[dragAndDrop.js] processDropData in draganddrop" ,appData)
   if (!appData) return null;
   
   try {

@@ -83,11 +83,24 @@ export const DraggableNode = ({ type, label, isFloating = false, isSidebar = fal
     };
   };
 
+  const handleDragStartWrapper = (event) => {
+    console.log("[DraggableNode.js] Dragging event:", event); // should match NODE_TYPES key
+    console.log("[DraggableNode.js] Dragging label:", label); // should match NODE_TYPES key
+    console.log("[DraggableNode.js] Dragging type:", type); // should match NODE_TYPES key
+    handleDragStart(event, type);
+  };
+
+
+  const handleDragEndWrapper = (event) => {
+    event.stopPropagation();
+    handleDragEnd(event);
+  };
+
   return (
     <motion.div
       className={`draggable-node ${type} ${isSidebar ? 'sidebar-node' : ''}`}
-      onDragStart={(event) => handleDragStart(event, type)}
-      onDragEnd={handleDragEnd}
+      onDragStart={handleDragStartWrapper}
+      onDragEnd={handleDragEndWrapper}
       style={getBaseStyle()}
       draggable
       whileHover={getHoverEffects()}
