@@ -1,10 +1,9 @@
+import { COLORS } from './theme';
+
 // UI Constants
 export const GRID_SIZE = 20;
 
-export const THEMES = {
-  LIGHT: 'light',
-  DARK: 'dark',
-};
+export { THEMES } from './theme';
 
 export const TUTORIAL_STEPS = [
   {

@@ -4,35 +4,37 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(0, 0, 0, 0.7);
+  background: rgba(15, 10, 31, 0.8);
   z-index: 1000;
   display: flex;
   align-items: center;
   justify-content: center;
+  backdrop-filter: blur(8px);
 }
 
 .tutorial-card {
   position: absolute;
-  background: #2c3e50;
+  background: var(--card-bg);
   padding: 24px;
-  border-radius: 12px;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+  border-radius: 16px;
+  box-shadow: 0 8px 32px rgba(176, 137, 246, 0.3);
   max-width: 400px;
-  color: white;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(8px);
+  color: var(--text-color);
+  border: 2px solid var(--border-color);
+  backdrop-filter: blur(12px);
 }
 
 .tutorial-card h3 {
   margin: 0 0 16px 0;
-  color: #3498db;
+  color: var(--primary-color);
   font-size: 1.5em;
+  text-shadow: 0 2px 4px rgba(176, 137, 246, 0.2);
 }
 
 .tutorial-card p {
   margin: 0 0 20px 0;
   line-height: 1.6;
-  color: #ecf0f1;
+  color: var(--text-secondary);
 }
 
 .tutorial-controls {
@@ -43,9 +45,9 @@
 }
 
 .tutorial-button {
-  background: #34495e;
-  color: white;
-  border: none;
+  background: var(--card-bg);
+  color: var(--text-color);
+  border: 2px solid var(--border-color);
   padding: 8px 16px;
   border-radius: 8px;
   cursor: pointer;
@@ -54,16 +56,21 @@
 }
 
 .tutorial-button:hover {
-  background: #2c3e50;
+  background: var(--primary-color);
+  color: white;
   transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(176, 137, 246, 0.3);
 }
 
 .tutorial-button.primary {
-  background: #3498db;
+  background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+  color: white;
+  border-color: var(--primary-color);
 }
 
 .tutorial-button.primary:hover {
-  background: #2980b9;
+  background: linear-gradient(45deg, var(--secondary-color), var(--tertiary-color));
+  box-shadow: 0 6px 12px rgba(176, 137, 246, 0.4);
 }
 
 .tutorial-progress {
@@ -75,37 +82,15 @@
 .progress-dot {
   width: 8px;
   height: 8px;
-  background: rgba(255, 255, 255, 0.2);
+  background: rgba(176, 137, 246, 0.3);
   border-radius: 50%;
   transition: all 0.3s ease;
 }
 
 .progress-dot.active {
-  background: #3498db;
+  background: var(--primary-color);
   transform: scale(1.2);
-}
-
-.node-remove-btn {
-  position: absolute;
-  top: 8px;
-  right: 8px;
-  width: 24px;
-  height: 24px;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.1);
-  border: none;
-  color: white;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  font-size: 18px;
-  transition: all 0.3s ease;
-}
-
-.node-remove-btn:hover {
-  background: rgba(231, 76, 60, 0.8);
-  transform: scale(1.1);
+  box-shadow: 0 0 8px rgba(176, 137, 246, 0.5);
 }
 
 .theme-toggle {
@@ -115,17 +100,19 @@
   z-index: 1000;
   padding: 12px;
   border-radius: 50%;
-  background: rgba(52, 152, 219, 0.2);
-  border: 2px solid rgba(52, 152, 219, 0.3);
+  background: var(--card-bg);
+  border: 2px solid var(--border-color);
   cursor: pointer;
   font-size: 20px;
   transition: all 0.3s ease;
   color: var(--text-color);
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 12px rgba(176, 137, 246, 0.2);
+  backdrop-filter: blur(8px);
 }
 
 .theme-toggle:hover {
   transform: scale(1.1);
-  background: rgba(52, 152, 219, 0.3);
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  background: var(--primary-color);
+  color: white;
+  box-shadow: 0 6px 16px rgba(176, 137, 246, 0.3);
 }

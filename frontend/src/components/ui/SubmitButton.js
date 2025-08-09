@@ -45,16 +45,30 @@ export const SubmitButton = () => {
         right: "20px",
         padding: "12px 24px",
         fontSize: "16px",
-        backgroundColor: "#3498db",
+        background: "linear-gradient(45deg, #b089f6, #5809d8)",
         color: "white",
         border: "none",
         borderRadius: "8px",
         cursor: isLoading ? "wait" : "pointer",
         opacity: isLoading ? 0.7 : 1,
-        boxShadow: "0 4px 6px rgba(0, 0, 0, 0.2)",
+        boxShadow: "0 4px 12px rgba(176, 137, 246, 0.3)",
         transition: "all 0.3s ease",
         transform: isLoading ? "scale(0.98)" : "scale(1)",
         zIndex: 1000,
+      }}
+      onMouseEnter={(e) => {
+        if (!isLoading) {
+          e.target.style.background = "linear-gradient(45deg, #5809d8, #2f0676)";
+          e.target.style.transform = "scale(1.05) translateY(-2px)";
+          e.target.style.boxShadow = "0 6px 16px rgba(176, 137, 246, 0.4)";
+        }
+      }}
+      onMouseLeave={(e) => {
+        if (!isLoading) {
+          e.target.style.background = "linear-gradient(45deg, #b089f6, #5809d8)";
+          e.target.style.transform = "scale(1)";
+          e.target.style.boxShadow = "0 4px 12px rgba(176, 137, 246, 0.3)";
+        }
       }}
     >
       {isLoading ? "Processing..." : "Submit Pipeline"}
