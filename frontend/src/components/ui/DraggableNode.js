@@ -1,38 +1,48 @@
+import React from 'react';
+import { motion } from 'framer-motion';
 import { handleDragStart, handleDragEnd } from '../../utils/dragAndDrop';
 
-export const DraggableNode = ({ type, label }) => {
+export const DraggableNode = ({ type, label, isFloating = false }) => {
+  const baseStyle = {
+    cursor: 'grab',
+    minWidth: isFloating ? '60px' : '80px',
+    height: isFloating ? '60px' : '60px',
+    display: 'flex',
+    alignItems: 'center',
+    borderRadius: isFloating ? '50%' : '12px',
+    background: 'linear-gradient(135deg, var(--primary-color), var(--secondary-color))',
+    justifyContent: 'center',
+    flexDirection: 'column',
+    border: '2px solid rgba(176, 137, 246, 0.3)',
+    boxShadow: '0 4px 12px rgba(176, 137, 246, 0.3)',
+    transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+    color: '#fff',
+    fontSize: isFloating ? '11px' : '13px',
+    fontWeight: '600',
+    textAlign: 'center',
+    userSelect: 'none',
+  };
+
   return (
-    <div
-      className={type}
+    <motion.div
+      className={`draggable-node ${type}`}
       onDragStart={(event) => handleDragStart(event, type)}
       onDragEnd={handleDragEnd}
-      style={{ 
-        cursor: 'grab', 
-        minWidth: '80px', 
-        height: '60px',
-        display: 'flex', 
-        alignItems: 'center', 
-        borderRadius: '8px',
-        background: 'linear-gradient(135deg, #b089f6, #5809d8)',
-        justifyContent: 'center', 
-        flexDirection: 'column',
-        border: '2px solid rgba(176, 137, 246, 0.3)',
-        boxShadow: '0 4px 8px rgba(176, 137, 246, 0.2)',
-        transition: 'all 0.3s ease',
-      }} 
+      style={baseStyle}
       draggable
+      whileHover={{ 
+        scale: 1.05,
+        boxShadow: '0 6px 16px rgba(176, 137, 246, 0.4)'
+      }}
+      whileTap={{ scale: 0.95 }}
       onMouseEnter={(e) => {
-        e.target.style.transform = 'translateY(-2px) scale(1.05)';
-        e.target.style.boxShadow = '0 6px 12px rgba(176, 137, 246, 0.3)';
-        e.target.style.background = 'linear-gradient(135deg, #5809d8, #2f0676)';
+        e.target.style.background = 'linear-gradient(135deg, var(--secondary-color), var(--tertiary-color))';
       }}
       onMouseLeave={(e) => {
-        e.target.style.transform = 'translateY(0) scale(1)';
-        e.target.style.boxShadow = '0 4px 8px rgba(176, 137, 246, 0.2)';
-        e.target.style.background = 'linear-gradient(135deg, #b089f6, #5809d8)';
+        e.target.style.background = 'linear-gradient(135deg, var(--primary-color), var(--secondary-color))';
       }}
     >
-      <span style={{ color: '#fff' }}>{label}</span>
-    </div>
+      <span>{label}</span>
+    </motion.div>
   );
 };
