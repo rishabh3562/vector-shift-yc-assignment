@@ -125,6 +125,7 @@
 .n8n-sidebar-content {
   padding: 16px;
 }
+/* Add this to your global.css to fix N8NToolbar drag issues */
 
 .n8n-node-item {
   display: flex;
@@ -135,7 +136,8 @@
   background: rgba(176, 137, 246, 0.05);
   border: 1px solid rgba(176, 137, 246, 0.1);
   transition: all 0.3s ease;
-  cursor: pointer;
+  /* Remove cursor: pointer; to prevent interference */
+  position: relative;
 }
 
 .n8n-node-item:hover {
@@ -145,6 +147,41 @@
   box-shadow: 0 4px 12px rgba(176, 137, 246, 0.2);
 }
 
+/* Ensure draggable nodes in sidebar can receive drag events */
+.n8n-node-info .draggable-node {
+  position: relative;
+  z-index: 10; /* Ensure it's above other elements */
+}
+
+.n8n-node-info .sidebar-node {
+  background: transparent !important;
+  border: none !important;
+  padding: 0 !important;
+  box-shadow: none !important;
+  margin-bottom: 0 !important;
+  /* Ensure it can receive drag events */
+  pointer-events: auto !important;
+  cursor: grab !important;
+}
+
+.n8n-node-info .sidebar-node:hover {
+  background: rgba(176, 137, 246, 0.1) !important;
+  transform: none !important;
+  border-radius: 8px !important;
+  padding: 4px 8px !important;
+  border: 1px solid rgba(176, 137, 246, 0.2) !important;
+}
+
+/* Prevent description text from interfering with drag */
+.n8n-node-description {
+  margin: 0;
+  font-size: 12px;
+  color: var(--text-secondary);
+  line-height: 1.4;
+  pointer-events: none; /* This is key - prevents interference */
+}
+
+/* Icon should not interfere with dragging */
 .n8n-node-icon {
   font-size: 20px;
   margin-right: 12px;
@@ -153,26 +190,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  pointer-events: none; /* Prevent icon from capturing events */
 }
-
-.n8n-node-info {
-  flex: 1;
-  min-width: 0;
-}
-
-.n8n-node-info .draggable-node {
-  margin-bottom: 4px;
-  font-weight: 600;
-  color: var(--text-color);
-}
-
-.n8n-node-description {
-  margin: 0;
-  font-size: 12px;
-  color: var(--text-secondary);
-  line-height: 1.4;
-}
-
 .sidebar-node {
   background: transparent !important;
   border: none !important;

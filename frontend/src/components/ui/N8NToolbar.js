@@ -37,7 +37,7 @@ export const N8NToolbar = () => {
     };
 
     const nodeTypeEntries = Object.entries(NODE_TYPES);
-    console.log("nodetypes in n8ntoolbar: ", nodeTypeEntries)
+
     return (
         <>
             {/* Plus Button */}
@@ -103,18 +103,24 @@ export const N8NToolbar = () => {
                                         initial={{ opacity: 0, y: 20 }}
                                         animate={{ opacity: 1, y: 0 }}
                                         transition={{ delay: index * 0.05 }}
-                                        style={{ pointerEvents: 'auto' }} // Ensure pointer events work
+                                        // Remove onClick to prevent interference with drag
+                                        style={{
+                                            pointerEvents: 'none',  // Disable pointer events on container
+                                            position: 'relative'
+                                        }}
                                     >
                                         <div className="n8n-node-icon">
                                             {NODE_ICONS[type]}
                                         </div>
                                         <div className="n8n-node-info">
-                                            <DraggableNode
-                                                type={type}
-                                                label={NODE_LABELS[type]}
-                                                isFloating={false}
-                                                isSidebar={true}
-                                            />
+                                            <div style={{ pointerEvents: 'auto' }}>  {/* Re-enable for draggable node */}
+                                                <DraggableNode
+                                                    type={type}
+                                                    label={NODE_LABELS[type]}
+                                                    isFloating={false}
+                                                    isSidebar={true}
+                                                />
+                                            </div>
                                             <p className="n8n-node-description">
                                                 {NODE_DESCRIPTIONS[type]}
                                             </p>

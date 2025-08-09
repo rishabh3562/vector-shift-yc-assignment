@@ -5,8 +5,8 @@ import { N8NToolbar } from "./N8NToolbar";
 export const PipelineToolbar = () => {
   return (
     <>
-      <FloatingToolbar />
-      {/* <N8NToolbar /> */}
+      {/* <FloatingToolbar /> */}
+      <N8NToolbar />
 
     </>
   );
