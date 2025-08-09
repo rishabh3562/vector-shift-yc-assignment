@@ -1,69 +1,150 @@
+/* Base Node Container */
 .node-container {
-  width: 300px;
-  min-height: 120px;
+  width: 280px;
+  min-height: 100px;
   border: 2px solid var(--border-color);
-  border-radius: 20px;
+  border-radius: 16px;
   background: var(--card-bg);
-  box-shadow: 0 8px 32px rgba(176, 137, 246, 0.3);
-  padding: 16px;
+  box-shadow: 
+    0 4px 20px rgba(0, 0, 0, 0.1),
+    0 2px 8px rgba(176, 137, 246, 0.15);
   position: relative;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  backdrop-filter: blur(12px);
+  backdrop-filter: blur(8px);
+  overflow: visible; /* Important for handles to be visible */
 }
 
 .node-container:hover {
-  box-shadow: 0 12px 24px rgba(176, 137, 246, 0.4);
-  transform: translateY(-3px) scale(1.02);
+  box-shadow: 
+    0 8px 32px rgba(0, 0, 0, 0.15),
+    0 4px 16px rgba(176, 137, 246, 0.25);
+  transform: translateY(-2px);
   border-color: var(--primary-color);
 }
 
+/* Node Header - Consistent across all nodes */
 .node-header {
-  padding: 16px;
-  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-  border-bottom: 2px solid var(--border-color);
+  padding: 12px 16px;
+  margin: -2px -2px 0 -2px;
+  border-radius: 14px 14px 0 0;
   font-weight: 600;
-  border-radius: 16px 16px 0 0;
-  margin: -16px -16px 16px -16px;
-  color: #ffffff;
-  font-size: 1.2em;
+  font-size: 14px;
+  color: white;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
   position: relative;
   overflow: hidden;
+  min-height: 44px;
 }
 
+/* Node Header Backgrounds by Type */
+.input-node .node-header {
+  background: linear-gradient(135deg, #10b981, #059669);
+}
+
+.output-node .node-header {
+  background: linear-gradient(135deg, #ef4444, #dc2626);
+}
+
+.llm-node .node-header {
+  background: linear-gradient(135deg, #8b5cf6, #7c3aed);
+}
+
+.text-node .node-header {
+  background: linear-gradient(135deg, #f59e0b, #d97706);
+}
+
+.merge-node .node-header {
+  background: linear-gradient(135deg, #06b6d4, #0891b2);
+}
+
+.filter-node .node-header {
+  background: linear-gradient(135deg, #f97316, #ea580c);
+}
+
+.template-node .node-header {
+  background: linear-gradient(135deg, #14b8a6, #0d9488);
+}
+
+.validation-node .node-header {
+  background: linear-gradient(135deg, #84cc16, #65a30d);
+}
+
+.transform-node .node-header {
+  background: linear-gradient(135deg, #ec4899, #db2777);
+}
+
+/* Header shine effect */
 .node-header::after {
   content: "";
   position: absolute;
   top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: linear-gradient(45deg, rgba(255, 255, 255, 0.1), transparent);
-  pointer-events: none;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.2),
+    transparent
+  );
+  transition: left 0.5s ease;
 }
 
+.node-container:hover .node-header::after {
+  left: 100%;
+}
+
+/* Node Content */
 .node-content {
-  padding: 12px;
-  background: rgba(176, 137, 246, 0.05);
-  border-radius: 12px;
-  backdrop-filter: blur(8px);
+  padding: 16px;
+  background: transparent;
 }
 
+/* Remove Button */
+.node-remove-btn {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.2);
+  border: none;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  padding: 0;
+  opacity: 0.8;
+}
+
+.node-remove-btn:hover {
+  background: rgba(239, 68, 68, 0.9);
+  transform: scale(1.1);
+  opacity: 1;
+}
+
+/* Input and Select Styling */
 .node-input,
 .node-select {
   width: 100%;
-  padding: 12px 16px;
-  margin: 8px 0;
-  border: 2px solid var(--border-color);
-  border-radius: 12px;
-  font-size: 14px;
+  padding: 10px 12px;
+  margin: 6px 0;
+  border: 1.5px solid var(--border-color);
+  border-radius: 8px;
+  font-size: 13px;
   transition: all 0.3s ease;
-  background: rgba(176, 137, 246, 0.05);
+  background: rgba(255, 255, 255, 0.8);
   color: var(--text-color);
-  box-shadow: inset 0 2px 4px rgba(176, 137, 246, 0.1);
+  font-family: inherit;
+}
+
+[data-theme="dark"] .node-input,
+[data-theme="dark"] .node-select {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(176, 137, 246, 0.3);
 }
 
 .node-input:focus,
@@ -71,167 +152,378 @@
   border-color: var(--primary-color);
   outline: none;
   box-shadow: 0 0 0 3px rgba(176, 137, 246, 0.2);
-  background: rgba(176, 137, 246, 0.1);
+  background: rgba(255, 255, 255, 0.95);
 }
 
+[data-theme="dark"] .node-input:focus,
+[data-theme="dark"] .node-select:focus {
+  background: rgba(255, 255, 255, 0.15);
+}
+
+/* Select dropdown arrow */
 .node-select {
   cursor: pointer;
   appearance: none;
-  background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23b089f6%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E");
+  background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2212%22%20height%3D%2212%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%3E%3Cpath%20d%3D%22M6%209L12%2015L18%209%22%20stroke%3D%22%23666%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%2F%3E%3C%2Fsvg%3E");
   background-repeat: no-repeat;
-  background-position: right 12px top 50%;
-  background-size: 12px auto;
-  padding-right: 30px;
+  background-position: right 10px center;
+  background-size: 12px;
+  padding-right: 32px;
 }
 
+/* Textarea specific styling */
 textarea.node-input {
-  min-height: 120px;
+  min-height: 80px;
   resize: vertical;
-  font-family: "Monaco", "Menlo", "Ubuntu Mono", monospace;
-  line-height: 1.6;
+  font-family: "SF Mono", "Monaco", "Cascadia Code", "Roboto Mono", monospace;
+  line-height: 1.5;
+  font-size: 12px;
 }
 
-button {
-  background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+/* Button Styling */
+button:not(.node-remove-btn):not(.tutorial-button):not(.theme-toggle):not(.n8n-add-button):not(.n8n-close-button) {
+  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
   color: white;
   border: none;
-  padding: 10px 20px;
-  border-radius: 10px;
+  padding: 8px 16px;
+  border-radius: 6px;
   cursor: pointer;
-  font-size: 14px;
-  margin: 8px 0;
-  transition: all 0.3s ease;
+  font-size: 12px;
   font-weight: 500;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  box-shadow: 0 4px 6px rgba(176, 137, 246, 0.2);
-}
-
-button:hover {
-  background: linear-gradient(45deg, var(--secondary-color), var(--tertiary-color));
-  transform: translateY(-2px);
-  box-shadow: 0 6px 12px rgba(176, 137, 246, 0.3);
-}
-
-button:active {
-  transform: translateY(1px);
+  margin: 4px 0;
+  transition: all 0.2s ease;
   box-shadow: 0 2px 4px rgba(176, 137, 246, 0.2);
 }
 
-.variables-list {
-  font-size: 13px;
-  color: var(--text-color);
-  margin-top: 12px;
-  padding: 10px 16px;
-  background: linear-gradient(45deg, var(--secondary-color), var(--primary-color));
-  border-radius: 8px;
-  font-weight: 500;
-  box-shadow: 0 4px 6px rgba(176, 137, 246, 0.2);
-  border: 1px solid var(--border-color);
-}
-
-.handle {
-  width: 14px;
-  height: 14px;
-  background: var(--primary-color);
-  border: 3px solid var(--card-bg);
-  box-shadow: 0 0 10px rgba(176, 137, 246, 0.3);
-  transition: all 0.3s ease;
-}
-
-.handle:hover {
-  transform: scale(1.3);
-  border-color: var(--secondary-color);
-  box-shadow: 0 0 15px rgba(176, 137, 246, 0.5);
-}
-
-/* Node type specific styling */
-.input-node .node-header {
-  background: linear-gradient(135deg, #27ae60dd, #2ecc71dd);
-}
-
-.output-node .node-header {
-  background: linear-gradient(135deg, #e74c3cdd, #c0392bdd);
-}
-
-.llm-node .node-header {
+button:not(.node-remove-btn):not(.tutorial-button):not(.theme-toggle):not(.n8n-add-button):not(.n8n-close-button):hover {
   background: linear-gradient(135deg, var(--secondary-color), var(--tertiary-color));
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(176, 137, 246, 0.3);
 }
 
-.text-node .node-header {
-  background: linear-gradient(135deg, #f1c40fdd, #f39c12dd);
-}
-
-.transform-node .node-header {
-  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-}
-
-.merge-node .node-header {
-  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-}
-
-.filter-node .node-header {
-  background: linear-gradient(135deg, #e67e22dd, #d35400dd);
-}
-
-.template-node .node-header {
-  background: linear-gradient(135deg, #16a085dd, #1abc9cdd);
-}
-
-.validation-node .node-header {
-  background: linear-gradient(135deg, #27ae60dd, #2ecc71dd);
+/* Variables List */
+.variables-list {
+  font-size: 11px;
+  color: var(--text-secondary);
+  margin-top: 8px;
+  padding: 8px 12px;
+  background: rgba(176, 137, 246, 0.1);
+  border-radius: 6px;
+  font-weight: 500;
+  border: 1px solid rgba(176, 137, 246, 0.2);
 }
 
 .rules-list {
   list-style: none;
   padding: 0;
   margin: 8px 0;
-  max-height: 120px;
+  max-height: 100px;
   overflow-y: auto;
 }
 
 .rules-list li {
   background: rgba(176, 137, 246, 0.1);
-  margin: 4px 0;
-  padding: 6px 10px;
+  margin: 3px 0;
+  padding: 6px 8px;
   border-radius: 4px;
   color: var(--text-color);
-  border: 1px solid var(--border-color);
+  border: 1px solid rgba(176, 137, 246, 0.2);
+  font-size: 12px;
 }
 
-.node-remove-btn {
-  width: 24px;
-  height: 24px;
-  border-radius: 50%;
-  background: rgba(231, 76, 60, 0.8);
-  border: none;
-  color: white;
+/* HANDLES - The most important part for connection issues */
+.react-flow__handle {
+  width: 16px !important;
+  height: 16px !important;
+  border-radius: 50% !important;
+  background: var(--primary-color) !important;
+  border: 3px solid white !important;
+  position: absolute !important;
+  z-index: 10 !important;
+  cursor: crosshair !important;
+  transition: all 0.2s ease !important;
+  box-shadow: 0 2px 8px rgba(176, 137, 246, 0.4) !important;
+}
+
+/* Handle positioning - more visible */
+.react-flow__handle.react-flow__handle-left {
+  left: -8px !important;
+  transform: translateY(-50%) !important;
+}
+
+.react-flow__handle.react-flow__handle-right {
+  right: -8px !important;
+  transform: translateY(-50%) !important;
+}
+
+/* Handle hover effects */
+.react-flow__handle:hover {
+  background: var(--secondary-color) !important;
+  border-color: white !important;
+  transform: translateY(-50%) scale(1.3) !important;
+  box-shadow: 0 4px 12px rgba(176, 137, 246, 0.6) !important;
+  z-index: 20 !important;
+}
+
+/* Handle when connecting */
+.react-flow__handle.connecting {
+  background: var(--tertiary-color) !important;
+  animation: pulse-handle 1s infinite !important;
+}
+
+@keyframes pulse-handle {
+  0%, 100% {
+    transform: translateY(-50%) scale(1.2);
+    box-shadow: 0 4px 12px rgba(176, 137, 246, 0.6);
+  }
+  50% {
+    transform: translateY(-50%) scale(1.4);
+    box-shadow: 0 6px 16px rgba(176, 137, 246, 0.8);
+  }
+}
+
+/* Handle validity indicators */
+.react-flow__handle.valid {
+  background: #10b981 !important;
+  border-color: white !important;
+}
+
+.react-flow__handle.invalid {
+  background: #ef4444 !important;
+  border-color: white !important;
+}
+
+/* Connection line styling */
+.react-flow__connectionline {
+  stroke: var(--primary-color) !important;
+  stroke-width: 3px !important;
+  stroke-dasharray: 8, 4 !important;
+  animation: dash-flow 1s linear infinite !important;
+}
+
+/* Edge styling */
+.react-flow__edge-path {
+  stroke: var(--primary-color) !important;
+  stroke-width: 2.5px !important;
+  filter: drop-shadow(0 2px 4px rgba(176, 137, 246, 0.3)) !important;
+}
+
+.react-flow__edge.selected .react-flow__edge-path {
+  stroke: var(--secondary-color) !important;
+  stroke-width: 3.5px !important;
+  filter: drop-shadow(0 0 8px rgba(88, 9, 216, 0.5)) !important;
+}
+
+.react-flow__edge:hover .react-flow__edge-path {
+  stroke: var(--secondary-color) !important;
+  stroke-width: 3px !important;
+}
+
+/* Arrow markers */
+.react-flow__arrowhead {
+  fill: var(--primary-color) !important;
+}
+
+.react-flow__edge.selected .react-flow__arrowhead {
+  fill: var(--secondary-color) !important;
+}
+
+/* Improve handle visibility on node hover */
+.react-flow__node:hover .react-flow__handle {
+  opacity: 1 !important;
+  transform: translateY(-50%) scale(1.1) !important;
+  box-shadow: 0 3px 10px rgba(176, 137, 246, 0.5) !important;
+}
+
+/* Handle labels for better UX */
+.handle-label {
+  position: absolute;
+  font-size: 10px;
+  color: var(--text-secondary);
+  background: var(--card-bg);
+  padding: 2px 6px;
+  border-radius: 4px;
+  border: 1px solid var(--border-color);
+  white-space: nowrap;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+  z-index: 15;
+}
+
+.handle-label.input-label {
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.handle-label.output-label {
+  left: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.react-flow__handle:hover + .handle-label,
+.react-flow__node:hover .handle-label {
+  opacity: 1;
+}
+
+/* Node type specific styling with better contrast */
+.input-node {
+  border-color: rgba(16, 185, 129, 0.5);
+}
+
+.input-node:hover {
+  border-color: #10b981;
+  box-shadow: 
+    0 8px 32px rgba(0, 0, 0, 0.15),
+    0 4px 16px rgba(16, 185, 129, 0.3);
+}
+
+.output-node {
+  border-color: rgba(239, 68, 68, 0.5);
+}
+
+.output-node:hover {
+  border-color: #ef4444;
+  box-shadow: 
+    0 8px 32px rgba(0, 0, 0, 0.15),
+    0 4px 16px rgba(239, 68, 68, 0.3);
+}
+
+.llm-node {
+  border-color: rgba(139, 92, 246, 0.5);
+}
+
+.llm-node:hover {
+  border-color: #8b5cf6;
+  box-shadow: 
+    0 8px 32px rgba(0, 0, 0, 0.15),
+    0 4px 16px rgba(139, 92, 246, 0.3);
+}
+
+.text-node {
+  border-color: rgba(245, 158, 11, 0.5);
+}
+
+.text-node:hover {
+  border-color: #f59e0b;
+  box-shadow: 
+    0 8px 32px rgba(0, 0, 0, 0.15),
+    0 4px 16px rgba(245, 158, 11, 0.3);
+}
+
+.merge-node {
+  border-color: rgba(6, 182, 212, 0.5);
+}
+
+.merge-node:hover {
+  border-color: #06b6d4;
+  box-shadow: 
+    0 8px 32px rgba(0, 0, 0, 0.15),
+    0 4px 16px rgba(6, 182, 212, 0.3);
+}
+
+.filter-node {
+  border-color: rgba(249, 115, 22, 0.5);
+}
+
+.filter-node:hover {
+  border-color: #f97316;
+  box-shadow: 
+    0 8px 32px rgba(0, 0, 0, 0.15),
+    0 4px 16px rgba(249, 115, 22, 0.3);
+}
+
+.template-node {
+  border-color: rgba(20, 184, 166, 0.5);
+}
+
+.template-node:hover {
+  border-color: #14b8a6;
+  box-shadow: 
+    0 8px 32px rgba(0, 0, 0, 0.15),
+    0 4px 16px rgba(20, 184, 166, 0.3);
+}
+
+.validation-node {
+  border-color: rgba(132, 204, 22, 0.5);
+}
+
+.validation-node:hover {
+  border-color: #84cc16;
+  box-shadow: 
+    0 8px 32px rgba(0, 0, 0, 0.15),
+    0 4px 16px rgba(132, 204, 22, 0.3);
+}
+
+.transform-node {
+  border-color: rgba(236, 72, 153, 0.5);
+}
+
+.transform-node:hover {
+  border-color: #ec4899;
+  box-shadow: 
+    0 8px 32px rgba(0, 0, 0, 0.15),
+    0 4px 16px rgba(236, 72, 153, 0.3);
+}
+
+/* Handle positioning improvements */
+.handle-wrapper {
+  position: absolute;
   display: flex;
   align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  font-size: 14px;
+  z-index: 10;
+}
+
+.input-wrapper {
+  left: -12px;
+  flex-direction: row;
+}
+
+.output-wrapper {
+  right: -12px;
+  flex-direction: row-reverse;
+}
+
+/* Handle direction indicators - improved visibility */
+.handle-direction-indicator {
+  opacity: 0;
   transition: all 0.3s ease;
-  padding: 0;
-  line-height: 1;
-  backdrop-filter: blur(8px);
+  pointer-events: none;
+  color: var(--primary-color);
+  background: var(--card-bg);
+  border-radius: 4px;
+  padding: 2px 4px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  border: 1px solid var(--border-color);
+  font-size: 10px;
+  font-weight: 600;
 }
 
-.node-remove-btn:hover {
-  background: rgba(231, 76, 60, 1);
-  transform: scale(1.1);
-  box-shadow: 0 4px 12px rgba(231, 76, 60, 0.4);
+.input-indicator {
+  margin-right: 8px;
 }
 
-.node-remove-btn:active {
-  transform: scale(0.95);
+.output-indicator {
+  margin-left: 8px;
 }
 
-/* Animation */
+.react-flow__node:hover .handle-direction-indicator {
+  opacity: 1;
+}
+
+.handle-wrapper:hover .handle-direction-indicator {
+  opacity: 1;
+  transform: scale(1.05);
+  color: var(--secondary-color);
+}
+
+/* Animation for node appearance */
 @keyframes nodeAppear {
   0% {
     opacity: 0;
-    transform: scale(0.8) translateY(20px);
+    transform: scale(0.9) translateY(10px);
   }
   100% {
     opacity: 1;
@@ -240,24 +532,102 @@ button:active {
 }
 
 .node-container {
-  animation: nodeAppear 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  animation: nodeAppear 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* Custom scrollbar for textarea */
-textarea::-webkit-scrollbar {
-  width: 8px;
+/* ReactFlow specific overrides */
+.react-flow__node {
+  border-radius: 16px !important;
+  padding: 0 !important;
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
 }
 
-textarea::-webkit-scrollbar-track {
+.react-flow__node.selected {
+  box-shadow: 0 0 0 2px var(--primary-color) !important;
+}
+
+.react-flow__node.selected .node-container {
+  border-color: var(--primary-color);
+  box-shadow: 
+    0 8px 32px rgba(0, 0, 0, 0.15),
+    0 4px 16px rgba(176, 137, 246, 0.4);
+}
+
+/* Improve drag handle visibility */
+.react-flow__node.dragging {
+  opacity: 0.8;
+  transform: rotate(2deg);
+}
+
+.react-flow__node.dragging .node-container {
+  box-shadow: 
+    0 12px 40px rgba(0, 0, 0, 0.2),
+    0 6px 20px rgba(176, 137, 246, 0.4);
+}
+
+/* Connection line improvements */
+.react-flow__connectionline {
+  stroke: var(--primary-color) !important;
+  stroke-width: 3px !important;
+  stroke-dasharray: 6, 4 !important;
+  animation: dash-flow 1s linear infinite !important;
+  filter: drop-shadow(0 2px 4px rgba(176, 137, 246, 0.3)) !important;
+}
+
+@keyframes dash-flow {
+  0% {
+    stroke-dashoffset: 0;
+  }
+  100% {
+    stroke-dashoffset: 20;
+  }
+}
+
+/* Better edge selection */
+.react-flow__edge-path {
+  cursor: pointer;
+}
+
+.react-flow__edge:hover .react-flow__edge-path {
+  stroke-width: 3px !important;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
   background: rgba(176, 137, 246, 0.1);
-  border-radius: 4px;
+  border-radius: 3px;
 }
 
-textarea::-webkit-scrollbar-thumb {
+::-webkit-scrollbar-thumb {
   background: var(--primary-color);
-  border-radius: 4px;
+  border-radius: 3px;
 }
 
-textarea::-webkit-scrollbar-thumb:hover {
+::-webkit-scrollbar-thumb:hover {
   background: var(--secondary-color);
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .node-container {
+    width: 260px;
+  }
+  
+  .node-header {
+    padding: 10px 14px;
+    font-size: 13px;
+  }
+  
+  .node-input,
+  .node-select {
+    font-size: 12px;
+    padding: 8px 10px;
+  }
 }
