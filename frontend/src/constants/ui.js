@@ -1,5 +1,3 @@
-import { COLORS } from './theme';
-
 // UI Constants
 export const GRID_SIZE = 20;
 

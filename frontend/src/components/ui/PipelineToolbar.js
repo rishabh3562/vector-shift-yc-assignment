@@ -1,6 +1,6 @@
 
 import React from "react";
-import { FloatingToolbar } from "./FloatingToolbar";
+// import { FloatingToolbar } from "./FloatingToolbar";
 import { N8NToolbar } from "./N8NToolbar";
 export const PipelineToolbar = () => {
   return (
