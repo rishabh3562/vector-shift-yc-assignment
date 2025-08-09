@@ -22,7 +22,9 @@
   --tertiary-color: #2f0676;
 }
 
-html, body, #root {
+html,
+body,
+#root {
   margin: 0;
   padding: 0;
   height: 100%;
@@ -32,7 +34,7 @@ html, body, #root {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: var(--bg-color); 
+  background-color: var(--bg-color);
   color: var(--text-color);
   transition: all 0.3s ease;
   overflow: hidden;
@@ -41,10 +43,11 @@ html, body, #root {
 .app-container {
   min-height: 100vh;
   background-color: var(--bg-color);
-  background-image:
-    radial-gradient(circle at center,
+  background-image: radial-gradient(
+      circle at center,
       rgba(176, 137, 246, 0.1) 0%,
-      rgba(47, 6, 118, 0.05) 70%),
+      rgba(47, 6, 118, 0.05) 70%
+    ),
     radial-gradient(#b089f6 1px, transparent 1px);
   background-repeat: no-repeat, repeat;
   background-position: center center, 0 0;
@@ -53,10 +56,11 @@ html, body, #root {
 }
 
 .app-container.dark {
-  background-image:
-    radial-gradient(circle at center,
+  background-image: radial-gradient(
+      circle at center,
       rgba(176, 137, 246, 0.15) 0%,
-      rgba(15, 10, 31, 1) 70%),
+      rgba(15, 10, 31, 1) 70%
+    ),
     radial-gradient(#b089f6 1px, transparent 1px);
 }
 
@@ -69,18 +73,29 @@ html, body, #root {
   border: 2px solid var(--border-color);
   border-radius: 16px;
   background: var(--card-bg);
-  box-shadow: 
-    0 4px 20px rgba(0, 0, 0, 0.1),
-    0 2px 8px rgba(176, 137, 246, 0.15);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1), 0 2px 8px rgba(176, 137, 246, 0.15);
   position: relative;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   backdrop-filter: blur(8px);
   overflow: visible;
 }
 
+.handle-wrapper.input-wrapper,
+.handle-wrapper.output-wrapper {
+  position: relative !important; /* relative, not absolute */
+  left: 0 !important; /* remove fixed offsets */
+  right: 0 !important;
+  margin: 1rem 0; /* spacing between handles */
+  display: flex !important;
+  align-items: center !important;
+}
+
+.handle-wrapper.output-wrapper {
+  flex-direction: row-reverse !important;
+}
+
 .node-container:hover {
-  box-shadow: 
-    0 8px 32px rgba(0, 0, 0, 0.15),
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15),
     0 4px 16px rgba(176, 137, 246, 0.25);
   transform: translateY(-2px);
   border-color: var(--primary-color);
@@ -245,8 +260,14 @@ textarea.node-input {
 }
 
 /* Button Styling */
-button:not(.node-remove-btn):not(.tutorial-button):not(.theme-toggle):not(.n8n-add-button):not(.n8n-close-button) {
-  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+button:not(.node-remove-btn):not(.tutorial-button):not(.theme-toggle):not(
+    .n8n-add-button
+  ):not(.n8n-close-button) {
+  background: linear-gradient(
+    135deg,
+    var(--primary-color),
+    var(--secondary-color)
+  );
   color: white;
   border: none;
   padding: 8px 16px;
@@ -259,8 +280,14 @@ button:not(.node-remove-btn):not(.tutorial-button):not(.theme-toggle):not(.n8n-a
   box-shadow: 0 2px 4px rgba(176, 137, 246, 0.2);
 }
 
-button:not(.node-remove-btn):not(.tutorial-button):not(.theme-toggle):not(.n8n-add-button):not(.n8n-close-button):hover {
-  background: linear-gradient(135deg, var(--secondary-color), var(--tertiary-color));
+button:not(.node-remove-btn):not(.tutorial-button):not(.theme-toggle):not(
+    .n8n-add-button
+  ):not(.n8n-close-button):hover {
+  background: linear-gradient(
+    135deg,
+    var(--secondary-color),
+    var(--tertiary-color)
+  );
   transform: translateY(-1px);
   box-shadow: 0 4px 8px rgba(176, 137, 246, 0.3);
 }
@@ -312,8 +339,7 @@ button:not(.node-remove-btn):not(.tutorial-button):not(.theme-toggle):not(.n8n-a
 
 .react-flow__node.selected .node-container {
   border-color: var(--primary-color);
-  box-shadow: 
-    0 8px 32px rgba(0, 0, 0, 0.15),
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15),
     0 4px 16px rgba(176, 137, 246, 0.4);
 }
 
@@ -344,13 +370,13 @@ button:not(.node-remove-btn):not(.tutorial-button):not(.theme-toggle):not(.n8n-a
 }
 
 /* Handle hover effects */
-.react-flow__handle:hover {
+/* .react-flow__handle:hover {
   background: var(--secondary-color) !important;
   border-color: white !important;
   transform: translateY(-50%) scale(1.4) !important;
   box-shadow: 0 4px 12px rgba(176, 137, 246, 0.6) !important;
   z-index: 20 !important;
-}
+} */
 
 /* Handle when connecting */
 .react-flow__handle.connecting {
@@ -359,7 +385,8 @@ button:not(.node-remove-btn):not(.tutorial-button):not(.theme-toggle):not(.n8n-a
 }
 
 @keyframes pulse-handle {
-  0%, 100% {
+  0%,
+  100% {
     transform: translateY(-50%) scale(1.2);
     box-shadow: 0 4px 12px rgba(176, 137, 246, 0.6);
   }
@@ -441,9 +468,7 @@ button:not(.node-remove-btn):not(.tutorial-button):not(.theme-toggle):not(.n8n-a
 
 .input-node:hover {
   border-color: #10b981;
-  box-shadow: 
-    0 8px 32px rgba(0, 0, 0, 0.15),
-    0 4px 16px rgba(16, 185, 129, 0.3);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15), 0 4px 16px rgba(16, 185, 129, 0.3);
 }
 
 .output-node {
@@ -452,9 +477,7 @@ button:not(.node-remove-btn):not(.tutorial-button):not(.theme-toggle):not(.n8n-a
 
 .output-node:hover {
   border-color: #ef4444;
-  box-shadow: 
-    0 8px 32px rgba(0, 0, 0, 0.15),
-    0 4px 16px rgba(239, 68, 68, 0.3);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15), 0 4px 16px rgba(239, 68, 68, 0.3);
 }
 
 .llm-node {
@@ -463,9 +486,7 @@ button:not(.node-remove-btn):not(.tutorial-button):not(.theme-toggle):not(.n8n-a
 
 .llm-node:hover {
   border-color: #8b5cf6;
-  box-shadow: 
-    0 8px 32px rgba(0, 0, 0, 0.15),
-    0 4px 16px rgba(139, 92, 246, 0.3);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15), 0 4px 16px rgba(139, 92, 246, 0.3);
 }
 
 .text-node {
@@ -474,9 +495,7 @@ button:not(.node-remove-btn):not(.tutorial-button):not(.theme-toggle):not(.n8n-a
 
 .text-node:hover {
   border-color: #f59e0b;
-  box-shadow: 
-    0 8px 32px rgba(0, 0, 0, 0.15),
-    0 4px 16px rgba(245, 158, 11, 0.3);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15), 0 4px 16px rgba(245, 158, 11, 0.3);
 }
 
 .merge-node {
@@ -485,9 +504,7 @@ button:not(.node-remove-btn):not(.tutorial-button):not(.theme-toggle):not(.n8n-a
 
 .merge-node:hover {
   border-color: #06b6d4;
-  box-shadow: 
-    0 8px 32px rgba(0, 0, 0, 0.15),
-    0 4px 16px rgba(6, 182, 212, 0.3);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15), 0 4px 16px rgba(6, 182, 212, 0.3);
 }
 
 .filter-node {
@@ -496,9 +513,7 @@ button:not(.node-remove-btn):not(.tutorial-button):not(.theme-toggle):not(.n8n-a
 
 .filter-node:hover {
   border-color: #f97316;
-  box-shadow: 
-    0 8px 32px rgba(0, 0, 0, 0.15),
-    0 4px 16px rgba(249, 115, 22, 0.3);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15), 0 4px 16px rgba(249, 115, 22, 0.3);
 }
 
 .template-node {
@@ -507,9 +522,7 @@ button:not(.node-remove-btn):not(.tutorial-button):not(.theme-toggle):not(.n8n-a
 
 .template-node:hover {
   border-color: #14b8a6;
-  box-shadow: 
-    0 8px 32px rgba(0, 0, 0, 0.15),
-    0 4px 16px rgba(20, 184, 166, 0.3);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15), 0 4px 16px rgba(20, 184, 166, 0.3);
 }
 
 .validation-node {
@@ -518,9 +531,7 @@ button:not(.node-remove-btn):not(.tutorial-button):not(.theme-toggle):not(.n8n-a
 
 .validation-node:hover {
   border-color: #84cc16;
-  box-shadow: 
-    0 8px 32px rgba(0, 0, 0, 0.15),
-    0 4px 16px rgba(132, 204, 22, 0.3);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15), 0 4px 16px rgba(132, 204, 22, 0.3);
 }
 
 .transform-node {
@@ -529,9 +540,7 @@ button:not(.node-remove-btn):not(.tutorial-button):not(.theme-toggle):not(.n8n-a
 
 .transform-node:hover {
   border-color: #ec4899;
-  box-shadow: 
-    0 8px 32px rgba(0, 0, 0, 0.15),
-    0 4px 16px rgba(236, 72, 153, 0.3);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15), 0 4px 16px rgba(236, 72, 153, 0.3);
 }
 
 /* ===== REACT FLOW CONTROLS AND UI ===== */
@@ -594,7 +603,11 @@ button:not(.node-remove-btn):not(.tutorial-button):not(.theme-toggle):not(.n8n-a
   width: 48px;
   height: 48px;
   border-radius: 50%;
-  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+  background: linear-gradient(
+    135deg,
+    var(--primary-color),
+    var(--secondary-color)
+  );
   border: none;
   color: white;
   cursor: pointer;
@@ -608,7 +621,11 @@ button:not(.node-remove-btn):not(.tutorial-button):not(.theme-toggle):not(.n8n-a
 }
 
 .n8n-add-button:hover {
-  background: linear-gradient(135deg, var(--secondary-color), var(--tertiary-color));
+  background: linear-gradient(
+    135deg,
+    var(--secondary-color),
+    var(--tertiary-color)
+  );
   box-shadow: 0 6px 16px rgba(176, 137, 246, 0.4);
   transform: scale(1.05);
 }
@@ -633,7 +650,11 @@ button:not(.node-remove-btn):not(.tutorial-button):not(.theme-toggle):not(.n8n-a
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background: linear-gradient(135deg, rgba(176, 137, 246, 0.1), rgba(88, 9, 216, 0.05));
+  background: linear-gradient(
+    135deg,
+    rgba(176, 137, 246, 0.1),
+    rgba(88, 9, 216, 0.05)
+  );
 }
 
 .n8n-sidebar-header h3 {
@@ -769,7 +790,11 @@ button:not(.node-remove-btn):not(.tutorial-button):not(.theme-toggle):not(.n8n-a
 }
 
 .Toastify__progress-bar {
-  background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+  background: linear-gradient(
+    to right,
+    var(--primary-color),
+    var(--secondary-color)
+  );
 }
 
 /* ===== ANIMATION ===== */
@@ -792,7 +817,8 @@ button:not(.node-remove-btn):not(.tutorial-button):not(.theme-toggle):not(.n8n-a
 /* ===== MISCELLANEOUS ===== */
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
 }
 
 /* Custom scrollbar */
@@ -820,12 +846,12 @@ code {
   .node-container {
     width: 260px;
   }
-  
+
   .node-header {
     padding: 10px 14px;
     font-size: 13px;
   }
-  
+
   .node-input,
   .node-select {
     font-size: 12px;

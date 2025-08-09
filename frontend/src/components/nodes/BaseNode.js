@@ -25,9 +25,9 @@ export const BaseNode = ({
   return (
     <motion.div
       className={`node-container ${type}-node`}
-      initial={{scale: 0.8, opacity: 0}}
-      animate={{scale: 1, opacity: 1}}
-      exit={{scale: 0.8, opacity: 0}}
+      initial={{ scale: 0.8, opacity: 0 }}
+      animate={{ scale: 1, opacity: 1 }}
+      exit={{ scale: 0.8, opacity: 0 }}
       whileHover={{ scale: 1.02 }}
       transition={{ duration: 0.2 }}
     >
@@ -59,7 +59,7 @@ export const BaseNode = ({
           key={`input-${index}`}
           className="handle-wrapper input-wrapper"
           style={{ top: `${((index + 1) * 100) / (inputs.length + 1)}%` }}
-          whileHover={{ scale: 1.2 }}
+          // whileHover={{ scale: 1.2 }}
         >
           <Handle
             type="target"
@@ -70,7 +70,7 @@ export const BaseNode = ({
           <div className="handle-direction-indicator input-indicator">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none">
               <path
-                d="M19 12H5M12 19L5 12L12 5"
+                d="M19  12H5M12 19L5 12L12 5"
                 stroke="currentColor"
                 strokeWidth="2"
                 strokeLinecap="round"
@@ -89,7 +89,7 @@ export const BaseNode = ({
           key={`output-${index}`}
           className="handle-wrapper output-wrapper"
           style={{ top: `${((index + 1) * 100) / (outputs.length + 1)}%` }}
-          whileHover={{ scale: 1.2 }}
+          // whileHover={{ scale: 1.2 }}
         >
           <Handle
             type="source"
