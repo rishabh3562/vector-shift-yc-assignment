@@ -112,3 +112,4 @@ export const BaseNode = ({
       ))}
     </motion.div>
   );
+}
