@@ -40,6 +40,15 @@ A modern, interactive pipeline builder application built with React and React Fl
 - **Notifications**: React Toastify 10.0.6
 - **Validation**: AJV 8.17.1 with keywords support
 
+
+## 📸 Screenshots
+![WhatsApp Image 2025-08-09 at 23 52 34_a38a1749](https://github.com/user-attachments/assets/460fe502-af7f-4798-9b0a-77f03877079e)
+![WhatsApp Image 2025-08-09 at 23 54 31_d7ee1657](https://github.com/user-attachments/assets/98072c7d-0114-42a2-8d28-11ff90e5c72e)
+![WhatsApp Image 2025-08-09 at 23 56 31_45f58633](https://github.com/user-attachments/assets/0b03ec92-75b4-40b6-80cc-3dd931d4fffe)
+![WhatsApp Image 2025-08-09 at 23 57 20_b06bd079](https://github.com/user-attachments/assets/29e2a7a5-8589-4320-bcb8-4a12e12e9e16)
+![WhatsApp Image 2025-08-09 at 23 57 29_d02ab020](https://github.com/user-attachments/assets/c5ce7091-c44a-433b-b297-404c178ca155)
+
+
 ## 📦 Installation
 
 ### Prerequisites
