@@ -51,7 +51,7 @@ export const PipelineCanvas = () => {
   return (
     <div
       ref={reactFlowWrapper}
-      style={{ width: "100vw", height: "100vh", backgroundColor: "var(--bg-color)" }}
+      style={{ width: "100vw", height: "100vh" }}
       onDragOver={handleDragOver}
       onDrop={onDrop}
     >
@@ -71,7 +71,7 @@ export const PipelineCanvas = () => {
         minZoom={0.1}
         maxZoom={2}
         zoomOnScroll={true}
-        style={{ backgroundColor: "var(--bg-color)" }}
+        
       >
         <Background color="var(--border-color)" gap={GRID_SIZE} />
         <Controls />
