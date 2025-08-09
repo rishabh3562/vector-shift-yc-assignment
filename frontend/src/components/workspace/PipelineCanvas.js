@@ -51,8 +51,8 @@ export const PipelineCanvas = () => {
   return (
     <div
       ref={reactFlowWrapper}
-      style={{ width: "100vw", height: "70vh" }}
-      onDragOver={handleDragOver} // <-- here instead
+      style={{ width: "100vw", height: "100vh", backgroundColor: "var(--bg-color)" }}
+      onDragOver={handleDragOver}
       onDrop={onDrop}
     >
       <ReactFlow
@@ -66,9 +66,14 @@ export const PipelineCanvas = () => {
         proOptions={proOptions}
         snapGrid={[GRID_SIZE, GRID_SIZE]}
         connectionLineType="smoothstep"
-        fitView
+        fitView={false}          // disable auto-fit to allow free panning
+        panOnDrag={true}         // enable dragging to pan
+        minZoom={0.1}
+        maxZoom={2}
+        zoomOnScroll={true}
+        style={{ backgroundColor: "var(--bg-color)" }}
       >
-        <Background color="#aaa" gap={GRID_SIZE} />
+        <Background color="var(--border-color)" gap={GRID_SIZE} />
         <Controls />
         <MiniMap />
       </ReactFlow>

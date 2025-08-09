@@ -21,276 +21,58 @@
   --secondary-color: #5809d8;
   --tertiary-color: #2f0676;
 }
-/* N8N Style Toolbar Styles */
-.n8n-add-button {
-  position: fixed;
-  top: 20px;
-  left: 20px;
-  width: 48px;
-  height: 48px;
-  border-radius: 50%;
-  background: linear-gradient(
-    135deg,
-    var(--primary-color),
-    var(--secondary-color)
-  );
-  border: none;
-  color: white;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 0 4px 12px rgba(176, 137, 246, 0.3);
-  backdrop-filter: blur(8px);
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  z-index: 1000;
-}
 
-.n8n-add-button:hover {
-  background: linear-gradient(
-    135deg,
-    var(--secondary-color),
-    var(--tertiary-color)
-  );
-  box-shadow: 0 6px 16px rgba(176, 137, 246, 0.4);
-  transform: scale(1.05);
-}
-
-.n8n-backdrop {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(15, 10, 31, 0.5);
-  backdrop-filter: blur(4px);
-  z-index: 998;
-}
-
-.n8n-sidebar {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 320px;
-  height: 100vh;
-  background: var(--card-bg);
-  border-right: 2px solid var(--border-color);
-  box-shadow: 4px 0 20px rgba(176, 137, 246, 0.2);
-  backdrop-filter: blur(12px);
-  z-index: 999;
-  overflow-y: auto;
-}
-
-.n8n-sidebar-header {
-  padding: 20px 24px 16px;
-  border-bottom: 1px solid var(--border-color);
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  background: linear-gradient(
-    135deg,
-    rgba(176, 137, 246, 0.1),
-    rgba(88, 9, 216, 0.05)
-  );
-}
-
-.n8n-sidebar-header h3 {
+html, body, #root {
   margin: 0;
-  color: var(--text-color);
-  font-size: 1.2em;
-  font-weight: 600;
-}
-
-.n8n-close-button {
-  width: 28px;
-  height: 28px;
-  border-radius: 50%;
-  background: rgba(176, 137, 246, 0.1);
-  border: 1px solid var(--border-color);
-  color: var(--text-color);
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 18px;
-  font-weight: 300;
-  transition: all 0.3s ease;
-}
-
-.n8n-close-button:hover {
-  background: rgba(176, 137, 246, 0.2);
-  transform: scale(1.05);
-}
-
-.n8n-sidebar-content {
-  padding: 16px;
-}
-/* Add this to your global.css to fix N8NToolbar drag issues */
-
-.n8n-node-item {
-  display: flex;
-  align-items: flex-start;
-  padding: 12px;
-  margin-bottom: 8px;
-  border-radius: 12px;
-  background: rgba(176, 137, 246, 0.05);
-  border: 1px solid rgba(176, 137, 246, 0.1);
-  transition: all 0.3s ease;
-  /* Remove cursor: pointer; to prevent interference */
-  position: relative;
-}
-
-.n8n-node-item:hover {
-  background: rgba(176, 137, 246, 0.1);
-  border-color: rgba(176, 137, 246, 0.3);
-  transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(176, 137, 246, 0.2);
-}
-
-/* Ensure draggable nodes in sidebar can receive drag events */
-.n8n-node-info .draggable-node {
-  position: relative;
-  z-index: 10; /* Ensure it's above other elements */
-}
-
-.n8n-node-info .sidebar-node {
-  background: transparent !important;
-  border: none !important;
-  padding: 0 !important;
-  box-shadow: none !important;
-  margin-bottom: 0 !important;
-  /* Ensure it can receive drag events */
-  pointer-events: auto !important;
-  cursor: grab !important;
-}
-
-.n8n-node-info .sidebar-node:hover {
-  background: rgba(176, 137, 246, 0.1) !important;
-  transform: none !important;
-  border-radius: 8px !important;
-  padding: 4px 8px !important;
-  border: 1px solid rgba(176, 137, 246, 0.2) !important;
-}
-
-/* Prevent description text from interfering with drag */
-.n8n-node-description {
-  margin: 0;
-  font-size: 12px;
-  color: var(--text-secondary);
-  line-height: 1.4;
-  pointer-events: none; /* This is key - prevents interference */
-}
-
-/* Icon should not interfere with dragging */
-.n8n-node-icon {
-  font-size: 20px;
-  margin-right: 12px;
-  margin-top: 2px;
-  min-width: 24px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  pointer-events: none; /* Prevent icon from capturing events */
-}
-.sidebar-node {
-  background: transparent !important;
-  border: none !important;
-  padding: 0 !important;
-  box-shadow: none !important;
-  margin-bottom: 0 !important;
-}
-
-.sidebar-node:hover {
-  background: transparent !important;
-  transform: none !important;
-}
-
-/* Custom scrollbar for sidebar */
-.n8n-sidebar::-webkit-scrollbar {
-  width: 6px;
-}
-
-.n8n-sidebar::-webkit-scrollbar-track {
-  background: rgba(176, 137, 246, 0.1);
-  border-radius: 3px;
-}
-
-.n8n-sidebar::-webkit-scrollbar-thumb {
-  background: var(--primary-color);
-  border-radius: 3px;
-}
-
-.n8n-sidebar::-webkit-scrollbar-thumb:hover {
-  background: var(--secondary-color);
-}
-
-/* Animation for sidebar content */
-@keyframes slideInFromLeft {
-  from {
-    opacity: 0;
-    transform: translateX(-20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
-.n8n-node-item {
-  animation: slideInFromLeft 0.3s ease-out;
-}
-
-/* Mobile responsiveness */
-@media (max-width: 768px) {
-  .n8n-sidebar {
-    width: 100vw;
-    max-width: 340px;
-  }
-
-  .n8n-backdrop {
-    background: rgba(15, 10, 31, 0.7);
-  }
-}
-* {
-  box-sizing: border-box;
-}
-
-body {
-  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
     "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: var(--bg-color);
+  background-color: var(--bg-color); 
   color: var(--text-color);
   transition: all 0.3s ease;
+  overflow: hidden;
 }
 
 .app-container {
   min-height: 100vh;
-  padding: 20px;
-  background: radial-gradient(
-    circle at center,
-    rgba(176, 137, 246, 0.1) 0%,
-    rgba(47, 6, 118, 0.05) 70%
-  );
+  /* padding: 20px; */
+  background-color: var(--bg-color);
+  background-image:
+    radial-gradient(circle at center,
+      rgba(176, 137, 246, 0.1) 0%,
+      rgba(47, 6, 118, 0.05) 70%),
+    radial-gradient(#b089f6 1px, transparent 1px);
+  background-repeat: no-repeat, repeat;
+  background-position: center center, 0 0;
+  background-size: cover, 20px 20px; /* adjust dot spacing here */
   transition: all 0.3s ease;
 }
-
 .app-container.dark {
-  background: radial-gradient(
-    circle at center,
-    rgba(176, 137, 246, 0.15) 0%,
-    rgba(15, 10, 31, 1) 70%
-  );
+  background-image:
+    radial-gradient(circle at center,
+      rgba(176, 137, 246, 0.15) 0%,
+      rgba(15, 10, 31, 1) 70%),
+    radial-gradient(#b089f6 1px, transparent 1px);
 }
 
-.react-flow__pane {
-  cursor: default !important;
-}
+
+
+/* .react-flow__pane {
+  cursor: grab !important;
+  background-color: var(--bg-color);
+  height: 100%;
+  width: 100%;
+  border: none;
+} */
+
 
 .react-flow__node {
+  
   font-size: 14px;
   background: var(--card-bg);
   border-radius: 16px;
@@ -316,6 +98,7 @@ body {
   width: 90%;
   margin: 4px 0;
   transition: all 0.3s ease;
+  
 }
 
 .node-input:focus {
@@ -646,4 +429,263 @@ code {
 
 .react-flow__edge.selected .react-flow__arrowhead {
   fill: var(--secondary-color);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* N8N Style Toolbar Styles */
+.n8n-add-button {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: linear-gradient(
+    135deg,
+    var(--primary-color),
+    var(--secondary-color)
+  );
+  border: none;
+  color: white;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 12px rgba(176, 137, 246, 0.3);
+  backdrop-filter: blur(8px);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 1000;
+}
+
+.n8n-add-button:hover {
+  background: linear-gradient(
+    135deg,
+    var(--secondary-color),
+    var(--tertiary-color)
+  );
+  box-shadow: 0 6px 16px rgba(176, 137, 246, 0.4);
+  transform: scale(1.05);
+}
+/* the backdrop was creating some issues */
+.n8n-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(15, 10, 31, 0.5);
+  backdrop-filter: blur(4px);
+  z-index: 998;
+}
+
+.n8n-sidebar {
+ 
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 320px;
+  height: 100vh;
+  background: var(--card-bg);
+  border-right: 2px solid var(--border-color);
+  box-shadow: 4px 0 20px rgba(176, 137, 246, 0.2);
+  backdrop-filter: blur(12px);
+  z-index: 999;
+  overflow-y: auto;
+}
+
+.n8n-sidebar-header {
+   /* border:2px solid red; */
+  padding: 20px 24px 16px;
+  border-bottom: 1px solid var(--border-color);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: linear-gradient(
+    135deg,
+    rgba(176, 137, 246, 0.1),
+    rgba(88, 9, 216, 0.05)
+  );
+}
+
+.n8n-sidebar-header h3 {
+  margin: 0;
+  color: var(--text-color);
+  font-size: 1.2em;
+  font-weight: 600;
+}
+
+.n8n-close-button {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: rgba(176, 137, 246, 0.1);
+  border: 1px solid var(--border-color);
+  color: var(--text-color);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  font-weight: 300;
+  transition: all 0.3s ease;
+}
+
+.n8n-close-button:hover {
+  background: rgba(176, 137, 246, 0.2);
+  transform: scale(1.05);
+}
+
+.n8n-sidebar-content {
+  padding: 16px;
+}
+/* Add this to your global.css to fix N8NToolbar drag issues */
+
+.n8n-node-item {
+  display: flex;
+  align-items: flex-start;
+  padding: 12px;
+  margin-bottom: 8px;
+  border-radius: 12px;
+  background: rgba(176, 137, 246, 0.05);
+  border: 1px solid rgba(176, 137, 246, 0.1);
+  transition: all 0.3s ease;
+  /* Remove cursor: pointer; to prevent interference */
+  position: relative;
+}
+
+.n8n-node-item:hover {
+  background: rgba(176, 137, 246, 0.1);
+  border-color: rgba(176, 137, 246, 0.3);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(176, 137, 246, 0.2);
+}
+
+/* Ensure draggable nodes in sidebar can receive drag events */
+.n8n-node-info .draggable-node {
+  position: relative;
+  z-index: 10; /* Ensure it's above other elements */
+}
+
+.n8n-node-info .sidebar-node {
+  background: transparent !important;
+  border: none !important;
+  padding: 0 !important;
+  box-shadow: none !important;
+  margin-bottom: 0 !important;
+  /* Ensure it can receive drag events */
+  pointer-events: auto !important;
+  cursor: grab !important;
+}
+
+.n8n-node-info .sidebar-node:hover {
+  background: rgba(176, 137, 246, 0.1) !important;
+  transform: none !important;
+  border-radius: 8px !important;
+  padding: 4px 8px !important;
+  border: 1px solid rgba(176, 137, 246, 0.2) !important;
+}
+
+/* Prevent description text from interfering with drag */
+.n8n-node-description {
+  margin: 0;
+  font-size: 12px;
+  color: var(--text-secondary);
+  line-height: 1.4;
+  pointer-events: none; /* This is key - prevents interference */
+}
+
+/* Icon should not interfere with dragging */
+.n8n-node-icon {
+  font-size: 20px;
+  margin-right: 12px;
+  margin-top: 2px;
+  min-width: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none; /* Prevent icon from capturing events */
+}
+.sidebar-node {
+  background: transparent !important;
+  border: none !important;
+  padding: 0 !important;
+  box-shadow: none !important;
+  margin-bottom: 0 !important;
+}
+
+.sidebar-node:hover {
+  background: transparent !important;
+  transform: none !important;
+}
+
+/* Custom scrollbar for sidebar */
+.n8n-sidebar::-webkit-scrollbar {
+  width: 6px;
+}
+
+.n8n-sidebar::-webkit-scrollbar-track {
+  background: rgba(176, 137, 246, 0.1);
+  border-radius: 3px;
+}
+
+.n8n-sidebar::-webkit-scrollbar-thumb {
+  background: var(--primary-color);
+  border-radius: 3px;
+}
+
+.n8n-sidebar::-webkit-scrollbar-thumb:hover {
+  background: var(--secondary-color);
+}
+
+/* Animation for sidebar content */
+@keyframes slideInFromLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.n8n-node-item {
+  animation: slideInFromLeft 0.3s ease-out;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+  .n8n-sidebar {
+    width: 100vw;
+    max-width: 340px;
+  }
+
+  .n8n-backdrop {
+    background: rgba(15, 10, 31, 0.7);
+  }
+}
+* {
+  box-sizing: border-box;
 }
